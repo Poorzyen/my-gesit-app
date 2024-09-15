@@ -1,14 +1,14 @@
-// Fungsi untuk memulai audio welcome ketika halaman dibuka
 window.onload = function() {
-    const welcomeAudio = document.getElementById('welcome-audio');
+    var audio = document.getElementById('welcome-audio');
 
-    // Browser akan memblokir autoplay kecuali pengguna telah berinteraksi
+    // Hanya memutar audio setelah pengguna mengklik halaman
     document.addEventListener('click', function() {
-        if (welcomeAudio.paused) {
-            welcomeAudio.play(); // Memainkan audio saat pengguna berinteraksi
-        }
-    }, { once: true }); // Event listener hanya dipanggil sekali
+        audio.play().catch(function(error) {
+            console.log("Autoplay diblokir, akan diputar setelah interaksi pengguna.");
+        });
+    }, { once: true }); // Hanya sekali klik diperlukan
 };
+
 
 // Fungsi untuk memulai quiz
 function startQuiz() {
