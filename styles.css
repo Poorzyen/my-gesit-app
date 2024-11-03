@@ -1,0 +1,286 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background: url('img/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#quiz-container {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    padding: 20px;
+    max-width: 800px;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+h2, h3 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.options {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.option {
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.option img {
+    width: 120px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.option:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.next-button {
+    display: none;
+    width: 100%;
+    padding: 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 20px;
+}
+
+.next-button:hover {
+    background-color: #218838;
+    transform: scale(1.02);
+}
+
+.next-button:active {
+    transform: scale(0.98);
+}
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    border-radius: 10px;
+    text-align: center;
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#feedback-message {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.slide {
+    display: none;
+}
+
+.slide.active {
+    display: block;
+}
+
+#slide-6 {
+    text-align: center;
+    padding: 20px;
+    background: url('img/your-background-image.jpg') no-repeat center center fixed; 
+    background-size: cover;
+}
+
+.emoticon {
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    font-size: 100px; /* Adjust size of emoticon */
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.emoticon:hover {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+    filter: brightness(1.2); /* Brighten the emoticon */
+}
+
+/* CSS untuk Efek Bintang Kembang Api */
+@keyframes explode {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+.star {
+    width: 15px; /* Bigger stars */
+    height: 15px;
+    background-color: gold;
+    border-radius: 50%;
+    position: absolute; /* For animation */
+    opacity: 0; /* Initially hidden */
+    animation: sparkle 1.5s forwards; /* Apply sparkle effect */
+}
+
+@keyframes sparkle {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-50px) scale(0);
+        opacity: 0; /* Fade out */
+    }
+}
+
+.water {
+    position: absolute;
+    top: 20px; /* Position water drops below the emoticon */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.drop {
+    width: 8px; /* Bigger drops */
+    height: 20px;
+    background-color: lightblue;
+    border-radius: 50%;
+    position: absolute; /* For animation */
+    animation: drip 1s forwards; /* Apply drip effect */
+}
+
+@keyframes drip {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(20px);
+        opacity: 0; /* Fade out */
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .emoticon {
+        font-size: 80px; /* Smaller emoticons on smaller screens */
+    }
+
+    .star {
+        width: 10px; /* Adjust star size */
+        height: 10px;
+    }
+
+    .drop {
+        width: 5px; /* Adjust drop size */
+        height: 15px;
+    }
+}
+
+/* Adding Colorful Background to the Feedback */
+.feedback {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px;
+    border-radius: 10px;
+    color: white;
+    z-index: 1000; /* Make sure it's above other content */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    font-size: 18px;
+    transition: opacity 0.5s ease;
+}
+
+/* Styles for Correct and Incorrect Feedback */
+.feedback.correct {
+    background-color: #28a745; /* Green for correct answers */
+}
+
+.feedback.incorrect {
+    background-color: #dc3545; /* Red for incorrect answers */
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .emoticon {
+        font-size: 80px; /* Smaller emoticons on smaller screens */
+    }
+
+    .star {
+        width: 10px; /* Adjust star size */
+        height: 10px;
+    }
+
+    .drop {
+        width: 5px; /* Adjust drop size */
+        height: 15px;
+    }
+}
+@media (max-width: 600px) {
+    .option img {
+        width: 80px;
+    }
+
+    .next-button {
+        font-size: 16px;
+    }
+}
