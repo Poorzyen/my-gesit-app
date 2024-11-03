@@ -47,21 +47,22 @@ function playAudio(slideIndex) {
         currentAudio.play(); // Play question audio directly if no activity audio
     }
 }
-
-// Function to play answer audio
 function playAnswerAudio(audioSrc) {
+    // Ensure to stop any currently playing audio before starting a new one
     if (currentAudio && !currentAudio.paused) {
         currentAudio.pause();
         currentAudio.currentTime = 0;
     }
 
     currentAudio = new Audio(audioSrc);
-    currentAudio.play();
+    currentAudio.play().catch(error => {
+        console.error("Audio playback failed:", error); // Log any playback errors
+    });
 }
-
-// Function to check the answer
 function checkAnswer(slideIndex, answer, audioId) {
+    console.log(`Slide: ${slideIndex}, Answer: ${answer}, Correct Answer: ${correctAnswers[slideIndex]}`);
     const correctAnswer = correctAnswers[slideIndex];
+    console.log(`Audio Source: audio/${answer}.mp3`); // Log the audio source
     
     if (correctAnswer === answer) {
         showFeedback('Jawaban benar!', true);
@@ -71,7 +72,9 @@ function checkAnswer(slideIndex, answer, audioId) {
         document.getElementById(`next-${slideIndex}`).style.display = 'none';
     }
 
-    playAnswerAudio(audioId); // Play feedback audio based on answer
+    // Ensure the audio ID corresponds to the correct file path
+    const audioSrc = `audio/${answer}.mp3`;
+    playAnswerAudio(audioSrc); // Pass the audio source based on the answer
 }
 
 // Function to show interactive feedback in a modal
