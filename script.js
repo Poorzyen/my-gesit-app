@@ -149,7 +149,41 @@ function playFinalAudio() {
         delay += (audio.duration || 2) * 1000;
     });
 }
+function handleEmoticonClick(emotion) {
+    const happyAudio = document.getElementById('happy-audio');
+    const sadAudio = document.getElementById('sad-audio');
+    const starsContainer = document.querySelector('.stars');
 
+    // Menghentikan semua audio sebelumnya
+    document.querySelectorAll('audio').forEach(audio => audio.pause());
+
+    if (emotion === 'happy') {
+        happyAudio.currentTime = 0; // Reset waktu audio
+        happyAudio.play(); // Memutar audio happy
+        showStars(starsContainer); // Tampilkan animasi bintang
+    } else if (emotion === 'sad') {
+        sadAudio.currentTime = 0; // Reset waktu audio
+        sadAudio.play(); // Memutar audio sad
+    }
+}
+
+function showStars(container) {
+    container.style.display = 'block'; // Tampilkan bintang
+    // Mengatur posisi bintang dan animasi
+    const stars = container.children;
+    for (let i = 0; i < stars.length; i++) {
+        const star = stars[i];
+        // Mengatur posisi acak bintang
+        star.style.left = Math.random() * 100 + 'px';
+        star.style.top = Math.random() * 100 + 'px';
+        star.style.display = 'block'; // Menampilkan bintang
+        
+        // Setelah animasi selesai, sembunyikan bintang
+        star.addEventListener('animationend', () => {
+            star.style.display = 'none';
+        });
+    }
+}
 // Fungsi untuk menyelesaikan kuis
 function finishQuiz() {
     goToHome();
